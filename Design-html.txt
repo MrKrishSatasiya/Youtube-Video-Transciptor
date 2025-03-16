@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<body class="">
+    <style>
+        #saasbox-nav .saasbox-nav-banner {
+            height: 40px !important;
+            width: 100%;
+            position: fixed;
+            top: 60px;
+            right: 0;
+            left: 0;
+            background: ;
+            z-index: 99999;
+        }
+
+        #saasbox-nav .saasbox-nav-banner .nav-banner-content {
+            text-align: center;
+            line-height: 40px;
+            color: #3D3D3D;
+        }
+
+        #saasbox-nav .saasbox-nav-banner .nav-banner-close {
+            float: right;
+            margin-top: 11px;
+            margin-right: 11px;
+            cursor: pointer;
+            color: #3D3D3D;
+        }
+
+        #saasbox-nav .nav-navbar .nav-item>.nav,
+        .sbox-carousel-hover {
+            z-index: 100000;
+        }
+
+        #saasboxNavBanner .nav-banner-close .nav-banner-tooltip {
+            visibility: hidden;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            padding: 9px;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 1;
+            font-size: 14px;
+        }
+
+        #saasboxNavBanner .nav-banner-close:hover .nav-banner-tooltip {
+            visibility: visible;
+        }
+
+        #saasboxNavBanner .nav-banner-tooltip-bottom {
+            top: 45px;
+            bottom: auto;
+            right: 6px;
+        }
+
+        nav.nav {
+            right: -40px;
+        }
+
+        #saasboxNavBanner .nav-banner-tooltip-bottom::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: 61px;
+            border-width: 4px;
+            border-style: solid;
+            border-color: transparent transparent black transparent;
+        }
+
+        @media (min-width: 991.98px) {
+            #saasbox-nav .nav-navbar .nav-item>.nav {
+                display: none !important;
+            }
+
+            #saasbox-nav .nav-navbar .nav-item:hover>.nav {
+                display: block !important;
+            }
+        }
+
+        .over-navbar .navbar-toggler {
+            display: block;
+        }
+
+        .over-navbar .navbar-mobile {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            -webkit-box-align: start;
+            align-items: flex-start;
+            width: 300px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: -300px;
+            bottom: 0;
+            padding: 20px;
+            background-color: #fff;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-transition: left 0.3s ease;
+            transition: left 0.3s ease;
+            z-index: 1002;
+        }
+
+        .over-navbar .nav-navbar .nav {
+            position: static;
+            visibility: visible;
+            opacity: 1;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            margin-left: 1.25rem;
+            padding-top: 0;
+            padding-bottom: 0;
+            -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+        }
+
+        .over-navbar .nav-height {
+            height: auto !important;
+            line-height: inherit !important;
+        }
+
+        .over-navbar .backdrop-navbar {
+            display: block !important;
+        }
+
+        .over-navbar .nav-item-carousel-pc {
+            display: none;
+        }
+
+        .over-navbar .nav-carousel-mobile {
+            display: block;
+        }
+
+        .over-navbar .navbar-mobile>* {
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .over-navbar .nav-actived .nav-link {
+            border: none !important;
+        }
+
+        .over-navbar .nav-item>.nav-link {
+            color: rgba(117, 117, 117, 0.8) !important;
+            height: inherit !important;
+            line-height: inherit !important;
+            padding: 0.5rem !important;
+            margin: 0 !important;
+        }
+
+        .over-navbar .nav-item:hover .nav-link {
+            color: #555 !important;
+        }
+
+        .over-navbar .nav-hover .nav-link {
+            border: none !important;
+        }
+
+        .over-navbar .nav-hover:hover .nav-link,
+        .over-navbar .nav-actived .nav-link {
+            border: none !important;
+        }
+
+        .over-navbar .navbar-divider {
+            display: block;
+            height: 1px;
+            width: 100%;
+            margin: 1rem 0;
+            padding: 0;
+        }
+
+        .over-navbar .nav-navbar:not(.nav-inline) {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+
+        .over-navbar .nav-navbar:not(.nav-inline)>.nav-item>.nav-link,
+        .over-navbar .nav-navbar:not(.nav-inline)>.nav-link {
+            min-height: inherit;
+            line-height: inherit;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            font-size: 0.95rem;
+            text-transform: none;
+        }
+
+        .over-navbar .nav-navbar:not(.nav-inline) .arrow {
+            float: right;
+            margin-top: 12px;
+            -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+        }
+
+        .over-navbar .nav-navbar:not(.nav-inline) .nav-divider {
+            display: none;
+        }
+
+        .over-navbar .nav-navbar:not(.nav-inline)>.nav-item>.nav {
+            display: none;
+            border-left: 1px dashed rgba(0, 0, 0, 0.08);
+        }
+
+        .over-navbar .nav-navbar:not(.nav-inline)>.nav-item>.nav::before {
+            content: '';
+            display: inline-block;
+            position: absolute;
+            top: 9px;
+            left: -4px;
+            bottom: 15px;
+            border-left: 1px dashed rgba(0, 0, 0, 0.08);
+            display: none;
+        }
+
+        .over-navbar .nav-navbar .nav.columns-2,
+        .over-navbar .nav-navbar .nav.columns-3 {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            flex-direction: column;
+            min-width: 100%;
+        }
+
+        .over-navbar .nav-navbar .nav.columns-2>.nav-link,
+        .over-navbar .nav-navbar .nav.columns-2>.nav-item,
+        .over-navbar .nav-navbar .nav.columns-3>.nav-link,
+        .over-navbar .nav-navbar .nav.columns-3>.nav-item {
+            flex-basis: 100%;
+        }
+
+        .over-navbar .nav-navbar .nav .nav-link {
+            padding-top: 0.375rem;
+            padding-bottom: 0.375rem;
+            font-size: 0.875rem;
+        }
+
+        .over-navbar .d-mobile-none {
+            display: none !important;
+        }
+
+        .over-navbar .d-mobile-block {
+            display: block !important;
+        }
+
+        .over-navbar .d-mobile-flex {
+            display: -webkit-box !important;
+            display: flex !important;
+        }
+
+        .over-navbar .d-mobile-inline-flex {
+            display: -webkit-inline-box !important;
+            display: inline-flex !important;
+        }
+
+        .over-navbar .d-mobile-inline-block {
+            display: inline-block !important;
+        }
+
+        .over-navbar .nav-item {
+            height: auto !important;
+        }
+
+        .over-navbar .nav-hover:hover,
+        .over-navbar .nav-type-button:hover {
+            background: #f5f5f5;
+        }
+
+        .over-navbar .nav-item:hover .nav-link {
+            color: #555;
+        }
+
+        .over-navbar .nav-item>.nav-link .arrow {
+            border-top: 3px solid rgba(117, 117, 117, 0.8) !important;
+        }
+
+        .over-navbar .nav-type-button .vertical-align-middle {
+            transform: inherit;
+            position: inherit;
+            top: inherit;
+        }
+
+        .over-navbar .nav-type-button .saasbox-btn {
+            border: inherit !important;
+            color: inherit !important;
+            border-radius: inherit !important;
+            padding: 0 !important;
+            line-height: inherit !important;
+            background-color: inherit !important;
+        }
+
+        .over-navbar .nav-type-icon>div {
+            color: inherit !important;
+        }
+
+        .over-navbar .nav-type-icon>div>.arrow {
+            border-top: 3px solid rgba(117, 117, 117, 0.8) !important;
+        }
+    </style>
+    <!-- Navbar -->
+    <nav id="saasbox-nav" class="navbar navbar-expand-lg navbar-light navbar-stick-dark">
+        <div class="container saasbox-container">
+
+            <div class="navbar-left">
+                <button class="navbar-toggler" type="button">&#9776;</button>
+                <a class="navbar-brand" href="/">
+                    <img class="logo-dark" src="" alt="">
+                    <img class="logo-light" src="" alt="">
+                </a>
+            </div>
+
+            <section class="navbar-mobile">
+                <span class='navbar-divider d-mobile-none'></span>
+                <ul class="nav nav-navbar nav-height">
+                    <li class='nav-item' style='height:40px;'>
+                        <span class='nav-link nav-type-text'
+                            style='margin-left: 10px; margin-right: 10px;;cursor: pointer;'>AI YouTube <span
+                                class='arrow'></span></span>
+                        <nav class='nav'>
+                    <li style='position: relative;' class='second_level'><a class='nav-link'
+                            href='/youtube-video-summarizer' target='_blank'>YouTube Video Summarizer</a></li>
+                    <li style='position: relative;' class='second_level'><a class='nav-link'
+                            href='/youtube-transcript-generator' target='_blank'>YouTube Transcript Generator</a></li>
+                    <li style='position: relative;' class='second_level'><a class='nav-link'
+                            href='/youtube-transcript-downloader' target='_blank'>YouTube Transcript Downloader</a></li>
+                    <li style='position: relative;' class='second_level'><a class='nav-link'
+                            href='/youtube-subtitle-downloader' target='_blank'>YouTube Subtitle Downloader</a></li>
+                    <li style='position: relative;' class='second_level'><a class='nav-link'
+                            href='/youtube-summary-with-chatgpt' target='_blank'>YouTube Summary with ChatGPT</a></li>
+    </nav>
+    </li>
+    <li class='nav-item' style='height:40px;'>
+        <span class='nav-link nav-type-text'
+            style='margin-left: 10px; margin-right: 10px;;cursor: pointer;'>Presentation <span
+                class='arrow'></span></span>
+        <nav class='nav'>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-ppt-maker' target='_blank'>AI PPT
+            Maker</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-presentation-maker'
+            target='_blank'>AI Presentation Maker</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-slide-generator'
+            target='_blank'>AI Slide Generator</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-keynote-generator'
+            target='_blank'>AI Keynote Generator</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ppt-summary' target='_blank'>AI PPT
+            Summarizer</a></li>
+    </nav>
+    </li>
+    <li class='nav-item' style='height:40px;'>
+        <span class='nav-link nav-type-text' style='margin-left: 10px; margin-right: 10px;;cursor: pointer;'>AI PDF
+            <span class='arrow'></span></span>
+        <nav class='nav'>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/chat-pdf'
+            target='_blank'>ChatPDF</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/pdf-summary' target='_blank'>PDF
+            Summarizer</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-pdf-reader' target='_blank'>PDF
+            Reader</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/pdf-translator' target='_blank'>PDF
+            Translator</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/pdf-to-markdown-converter'
+            target='_blank'>PDF to Markdown</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/pdf-to-excel' target='_blank'>PDF to
+            Excel</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/word-to-pdf' target='_blank'>Word to
+            PDF</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/image-to-pdf' target='_blank'>Image
+            to PDF</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/excel-to-pdf' target='_blank'>Excel
+            to PDF</a></li>
+    </nav>
+    </li>
+    <li class='nav-item' style='height:40px;'>
+        <span class='nav-link nav-type-text' style='margin-left: 10px; margin-right: 10px;;cursor: pointer;'>Study <span
+                class='arrow'></span></span>
+        <nav class='nav'>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ask-ai' target='_blank'>Ask AI</a>
+    </li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-math-solver' target='_blank'>AI
+            Math Solver</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-homework-helper'
+            target='_blank'>AI Homework Helper</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-flashcard-maker'
+            target='_blank'>AI Flashcard Maker</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-answer-generator'
+            target='_blank'>AI Answer Generator</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-quiz-generator'
+            target='_blank'>AI Quiz Generator</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-question-generator'
+            target='_blank'>AI Question Generator</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-grader' target='_blank'>AI
+            Grader</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-study-guide-maker'>AI Study Guide
+            Maker</a></li>
+    </nav>
+    </li>
+    <li class='nav-item' style='height:40px;'>
+        <span class='nav-link nav-type-text' style='margin-left: 10px; margin-right: 10px;;cursor: pointer;'>Writer
+            <span class='arrow'></span></span>
+        <nav class='nav'>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-detector' target='_blank'>AI
+            Detector</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-humanizer' target='_blank'>AI
+            Humanizer</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-essay-writer' target='_blank'>AI
+            Essay Writer</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-paragraph-generator'
+            target='_blank'>AI Paragraph Generator</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-idea-generator'
+            target='_blank'>AI Idea Generator</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-notes-generator'
+            target='_blank'>AI Notes Generator</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/ai-story-generator'
+            target='_blank'>AI Story Generator</a></li>
+    <li style='position: relative;' class='second_level'><a class='nav-link' href='/paragraph-rewriter'>Paragraph
+            Rewriter</a></li>
+    </nav>
+    </li>
+    <li class='nav-item' style='height:40px;position: relative;'>
+        <span class='nav-link nav-type-text' style='margin-left: 10px; margin-right: 10px;;cursor: pointer;'>AI Tools
+            <span class='arrow'></span></span>
+        <nav class='nav px-lg py-lg-4' style='overflow-y: auto;position: absolute;transform: translate(50%);'>
+            <div style='display: inline-block;vertical-align: top;min-width:110px;'>
+                <nav style='padding: 0 4px;'><a class='panel-second-level-menu'
+                        style='border-bottom: 1px solid #e7e7e7;font-weight: bold;margin: auto;text-align: center;color:#555;min-width:110px;'>AI
+                        Summarizer</a><a class='nav-link' style='margin: auto;text-align: center;'
+                        href='/youtube-video-summarizer' target='_blank'>YouTube Summarizer</a><a class='nav-link'
+                        style='margin: auto;text-align: center;' href='/pdf-summary' target='_blank'>PDF
+                        Summarizer</a><a class='nav-link' style='margin: auto;text-align: center;' href='/ppt-summary'
+                        target='_blank'>PPT Summarizer</a><a class='nav-link' style='margin: auto;text-align: center;'
+                        href='/image-summary' target='_blank'>Image Summarizer</a><a class='nav-link'
+                        style='margin: auto;text-align: center;' href='/video-summarizer' target='_blank'>Video
+                        Summarizer</a><a class='nav-link' style='margin: auto;text-align: center;' href='/audio-summary'
+                        target='_blank'>Audio Summarizer</a><a class='nav-link' style='margin: auto;text-align: center;'
+                        href='/book-summary' target='_blank'>Book Summarizer</a><a class='nav-link'
+                        style='margin: auto;text-align: center;' href='/podcast-summarizer' target='_blank'>Podcast
+                        Summarizer</a><a class='nav-link' style='margin: auto;text-align: center;'
+                        href='/article-summary' target='_blank'>Article Summarizer</a><a class='nav-link'
+                        style='margin: auto;text-align: center;' href='/word-summary' target='_blank'>Word
+                        Summarizer</a><a class='nav-link' style='margin: auto;text-align: center;'
+                        href='/ai-text-summarizer' target='_blank'>Text Summarizer</a></nav>
+            </div>
+            <div style='display: inline-block;vertical-align: top;min-width:110px;'>
+                <nav style='padding: 0 4px;'><a class='panel-second-level-menu'
+                        style='border-bottom: 1px solid #e7e7e7;font-weight: bold;margin: auto;text-align: center;color:#555;min-width:110px;'>AI
+                        Diagram</a><a class='nav-link' style='margin: auto;text-align: center;'
+                        href='/ai-visual-generator' target='_blank'>AI Visual Generator</a><a class='nav-link'
+                        style='margin: auto;text-align: center;' href='/ai-mind-map-generator' target='_blank'>AI Mind
+                        Map Generator</a><a class='nav-link' style='margin: auto;text-align: center;'
+                        href='/ai-sketchnotes-generator' target='_blank'>AI Sketchnotes Generator</a><a class='nav-link'
+                        style='margin: auto;text-align: center;' href='/ai-diagram-generator' target='_blank'>AI Diagram
+                        Generator</a>
+                    <a class='nav-link' style='margin: auto;text-align: center;' href='/ai-flowchart-generator'
+                        target='_blank'>AI Flowchart Generator</a><a class='nav-link'
+                        style='margin: auto;text-align: center;' href='/ai-pie-chart-generator' target='_blank'>AI Pie
+                        Chart Generator</a><a class='nav-link' style='margin: auto;text-align: center;'
+                        href='/er-diagram-generator' target='_blank'>AI ER Diagram Generator</a><a class='nav-link'
+                        style='margin: auto;text-align: center;' href='/sequence-diagram-generator' target='_blank'>AI
+                        Sequence Diagram Generator</a>
+                    <a class='nav-link' style='margin: auto;text-align: center;' href='/ai-infographic-generator'
+                        target='_blank'>AI Infographic Generator</a>
+                </nav>
+            </div>
+
+
+        </nav>
+    </li>
+    <li class='nav-item nav-hover' style='height:40px;'>
+        <a class='nav-link nav-type-text' href='/pricing' style='margin-left: 10px; margin-right: 10px;'>Pricing</a>
+
+    </li>
+    </ul>
+
+    <ul class="nav nav-navbar nav-right ml-auto nav-height">
+        <li class='nav-item' style='height:40px;'>
+            <a class='nav-link nav-type-button' href='/user/login' style='margin-left: 5px; margin-right: 5px;'>
+                <div class='saasbox-btn vertical-align-middle'
+                    style='border: 1px solid #2C2C2C; color: #FFFFFF; border-radius: 5px; padding:8px 10px; line-height: 1; background-color: #2C2C2C;;'>
+                    Login</div>
+            </a>
+
+        </li>
+        <li class='nav-item nav-hover' style='height:40px;'>
+            <a class='nav-link nav-type-text' href='/user/register' style='margin-left: 5px; margin-right: 5px;'>Sign
+                Up</a>
+
+        </li>
+    </ul>
+    </section>
+    <div class="nav-carousel-mobile"></div>
+    </div>
+    <div id="saasboxNavBanner" class="saasbox-nav-banner" style="display: none;"></div>
+    </nav>
+    <!-- /.navbar -->
+    <div class="layout-container" id="mainContent">
+        <div id="saasbox_page_content" data-login-status="0">
+            <!DOCTYPE html>
+            <html>
+
+            <body class="page-template-default page page-id-102309 wp-embed-responsive">
+                <main class="main-content">
+                    <style>
+                        .main-content {
+                            color: #3D3D3D;
+                        }
+
+                        .tab-text-color {
+                            color: #3D3D3D !important;
+                        }
+
+                        .tab-btn-default {
+                            border-radius: 12px !important;
+                            padding: 10px 25px 10px;
+                            margin: 0 10px !important;
+                            letter-spacing: normal !important;
+                            text-transform: unset !important;
+                        }
+
+                        .tab-btn-Krish's Ai {
+ background-color: #3D3D3D !important;
+                        border-color: #3D3D3D !important;
+                        }
+
+                        .tab-content-card {
+                            border-radius: 40px;
+                            box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
+                            background: #FFFFFF;
+                            text-align: left;
+                            padding: 2rem;
+                        }
+
+                        .tab-user-card img {
+                            width: 100%;
+                            height: auto;
+                            border-radius: 10px;
+                        }
+
+                        .tab-user-card h4 {
+                            width: 100%;
+                            text-align: left;
+                        }
+
+                        .tab-user-card p {
+                            width: 100%;
+                            height: auto;
+                            text-align: left;
+                        }
+
+                        .tab-logo-circle img {
+                            max-width: 100%;
+                            max-height: 100%;
+                        }
+
+                        #loading {
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(255, 255, 255, 0.7);
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            z-index: 9999;
+                        }
+
+                        .loader {
+                            border: 8px solid #f3f3f3;
+                            /* Light grey */
+                            border-top: 8px solid #3498db;
+                            /* Blue */
+                            border-radius: 50%;
+                            width: 50px;
+                            height: 50px;
+                            animation: spin 1s linear infinite;
+                        }
+
+                        @keyframes spin {
+                            0% {
+                                transform: rotate(0deg);
+                            }
+
+                            100% {
+                                transform: rotate(360deg);
+                            }
+                        }
+
+                        .feedback-btns {
+                            margin-top: 6px;
+                            display: flex;
+                        }
+
+                        .feedback-btns .feedback-btns-item {
+                            display: flex;
+                            align-items: center;
+                            cursor: pointer;
+                        }
+
+                        .feedback-btns .feedback-btns-item a {
+                            text-decoration: none;
+                            margin-left: 6px;
+                            color: #2E83FB;
+                            font-size: 14px;
+                            font-weight: 400;
+                        }
+                    </style>
+                    <link async
+                        href="https://cdn.Krish's Ai.io/Krish's Ai/tools/youtube-transcript-generator/v1/css/chunk-vendors.10dd4e95.css"
+                        rel="stylesheet">
+                    <link async
+                        href="https://cdn.Krish's Ai.io/Krish's Ai/tools/youtube-transcript-generator/v1/css/app.1f77a8b7.css"
+                        rel="stylesheet">
+                    <link rel="preload"
+                        href="https://cdn.Krish's Ai.io/Krish's Ai/tools/youtube-transcript-generator/v1/js/chunk-vendors.f3045f52.js"
+                        as="script">
+                    <link rel="preload"
+                        href="https://cdn.Krish's Ai.io/Krish's Ai/tools/youtube-transcript-generator/v1/js/app.f8e527fb.js"
+                        as="script">
+                    <header class="header overflow-hidden pb-0 text-center"
+                        style="background-color: #f3f8fb; padding-top: 100px;">
+                        <div class="container h-100">
+                            <div class="row align-items-center h-100">
+                                <div class="col-md-8 mx-auto">
+                                    <h1 class="lead-7 fw-600 tab-text-color">
+                                        YouTube Transcript Generator
+                                    </h1>
+                                    <p class="lead-2 mt-4 mb-7 tab-text-color" style="margin-bottom: 25px !important;">
+                                        Easily convert YouTube videos to text transcripts for free online with Krish's
+                                        Ai. Download or copy the transcripts with timestamps.
+                                    </p>
+                                </div>
+                                <div class="col-md-12 mx-auto">
+                                    <div id="app">
+                                        <div class="search-container">
+                                            <input type="text" id="videoUrl" placeholder="Enter YouTube video URL" />
+                                            <button id="getTranscript">Get Transcript</button>
+                                        </div>
+                                        <div id="error" class="hidden"></div>
+                                        <div class="video-info hidden">
+                                            <div id="videoThumbnail"></div>
+                                            <div class="video-details">
+                                                <h2 id="videoTitle"></h2>
+                                                <p id="channelName"></p>
+                                            </div>
+                                        </div>
+                                        <div class="transcript-controls hidden">
+                                            <input type="text" id="searchTranscript"
+                                                placeholder="Search in transcript..." />
+                                            <button id="downloadTranscript">Download</button>
+                                            <button id="copyTranscript">Copy</button>
+                                        </div>
+                                        <div id="transcript" class="hidden"></div>
+                                        <div class="loading-spinner hidden"></div>
+                                    </div>
+
+                                    <br><br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                    <section class="section" style="background-color: #ffffff;">
+                        <div class="container">
+                            <div class="row gap-y" style="margin: 20px -15px;">
+                                <div class="col-md-12 col-lg-12 mx-auto">
+                                    <h2 class="lead-7 fw-600">
+                                        Struggling to transcribe YouTube videos accurately?
+                                    </h2>
+                                    <p class="lead-1">
+                                        Use Krish's Ai to easily <a
+                                            href="https://Krish's Ai.io/youtube-transcript-generator" target="_blank"
+                                            rel="noopener noreferrer">convert YouTube to text</a> with timestamps.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row gap-y" style="display: flex; justify-content: space-between;">
+                                <div class="col-md-12 col-lg-12">
+                                    <ul style="margin-left: -20px;">
+                                        <li class="lead-1">
+                                            <strong>Accuracy</strong>: Krish's Ai provides highly accurate
+                                            transcriptions, ensuring every word is captured correctly.
+                                        </li>
+                                        <li class="lead-1">
+                                            <strong>Efficiency</strong>: Save time and effort with Krish's Ai's fast
+                                            transcription process, generating text with timestamps in seconds.
+                                        </li>
+                                        <li class="lead-1">
+                                            <strong>Convenience</strong>: Easily access and download transcripts for
+                                            future reference or use, enhancing productivity.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="section" style="background-color: #f3f8fb;">
+                        <div class="container">
+                            <div class="row gap-y" style="margin: 20px -15px;">
+                                <div class="col-md-12 col-lg-12 mx-auto">
+                                    <h2 class="lead-7 fw-600">
+                                        How to get transcript of YouTube video?
+                                    </h2>
+                                    <p class="lead-1">
+                                        You can use Krish's Ai to transcribe the YouTube videos with just 3 simple
+                                        steps.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row gap-y" style="display: flex; justify-content: space-between;">
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="tab-content-card">
+                                        <h3 class="lead-3 fw-500">
+                                            Step1: Upload Video
+                                        </h3>
+                                        <p class="lead-1">
+                                            Simply paste the YouTube video link into Krish's Ai.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="tab-content-card">
+                                        <h3 class="lead-3 fw-500">
+                                            Step2: Generate Transcript
+                                        </h3>
+                                        <p class="lead-1">
+                                            Click "Generate" to convert YouTube video into text.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="tab-content-card">
+                                        <h3 class="lead-3 fw-500">
+                                            Step3: Download or Copy
+                                        </h3>
+                                        <p class="lead-1">
+                                            Download YouTube transcript with timestamps or copy it for use.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="section text-center" style="background-color: #ffffff;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 mx-auto" style="background: linear-gradient(180deg, #0048D6 0%, #CED5FF 123%);
+                 border-radius: 30px; display: flex; flex-direction: column; align-items: center;
+                 opacity: 1; padding: 30px 40px; color: #ffffff;">
+                                    <br>
+                                    <h2 class="lead-6 fw-500" style="color: #ffffff;">
+                                        Start transcribing your YouTube videos effortlessly!
+                                    </h2>
+                                    <br><a class="btn btn-primary btn-xl btn-round tab-btn-default tab-btn-Krish's Ai"
+                                        target="_blank" href="/youtube-transcript-generator" rel="noopener noreferrer">
+                                        Start Transcription Online
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="section" style="background-color: #f3f8fb;">
+                        <div class="container">
+                            <div class="row gap-y" style="margin: 20px -15px;">
+                                <div class="col-md-12 col-lg-12 mx-auto">
+                                    <h2 class="lead-7 fw-600">
+                                        Why Choose YouTube Transcript Generator?
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="row gap-y" style="display: flex; justify-content: space-between;">
+                                <div class="col-md-12 col-lg-12">
+                                    <div class="tab-content-card">
+                                        <div style="display: flex;" class="mx-auto">
+                                            <div class="col-md-12 col-lg-12">
+                                                <ul style="margin-left: -20px;">
+                                                    <li class="lead-1">
+                                                        Free online tool, no need for login, installation of software,
+                                                        or plugins, or extension.
+                                                    </li>
+                                                    <li class="lead-1">
+                                                        Fast and efficient &ndash; obtain transcripts for YouTube videos
+                                                        instantly with just a link.
+                                                    </li>
+                                                    <li class="lead-1">
+                                                        Capable of retrieving transcripts for lengthy YouTube videos;
+                                                        even videos without transcripts can be generated using Krish's
+                                                        Ai's AI.
+                                                    </li>
+                                                    <li class="lead-1">
+                                                        Supports copying and downloading transcripts to txt, including
+                                                        copy transcript without timestamp information.
+                                                    </li>
+                                                    <li class="lead-1">
+                                                        Offers complimentary AI summarization capabilities; use Krish's
+                                                        Ai to grasp the entire YouTube transcript in just 1 minute.
+                                                    </li>
+                                                    <li class="lead-1">
+                                                        Cloud storage and note-taking support for easy learning and
+                                                        reference in the future.
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="section" style="background-color: #ffffff;">
+                        <div class="container">
+                            <div class="row gap-y" style="margin: 20px -15px;">
+                                <div class="col-md-12 col-lg-12 mx-auto">
+                                    <h2 class="lead-7 fw-600">
+                                        Use Cases
+                                    </h2>
+                                    <p class="lead-1">
+                                        Made for content creators, students, researchers &amp; youtuber minds of all
+                                        kind.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row gap-y" style="display: flex; justify-content: space-between;">
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="tab-content-card">
+                                        <img class="rounded-md"
+                                            src="https://cdn.zbaseglobal.com/saasbox/resources/png/1-Content-Creators.png__dadc0652e22c5f4ee79221d0b786b93e.png"
+                                            alt="Easily transcribe videos for closed captions or transcripts.">
+                                        <h3 class="lead-3 fw-500">
+                                            Content Creators
+                                        </h3>
+                                        <p class="lead-1">
+                                            Easily transcribe videos for closed captions or transcripts.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="tab-content-card">
+                                        <img class="rounded-md"
+                                            src="https://cdn.zbaseglobal.com/saasbox/resources/png/1-Students-and-Researchers-1__161930ad1dc8b5814c6debbd07001030.png"
+                                            alt="Simplify note-taking from educational videos.">
+                                        <h3 class="lead-3 fw-500">
+                                            Students and Researchers
+                                        </h3>
+                                        <p class="lead-1">
+                                            Simplify note-taking from educational videos.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="tab-content-card">
+                                        <img class="rounded-md"
+                                            src="https://cdn.zbaseglobal.com/saasbox/resources/png/1-Professionals.png__94358ab1a8fcfc7f513bd377cfc7c9c6.png"
+                                            alt="Create written records from conference or seminar videos.">
+                                        <h3 class="lead-3 fw-500">
+                                            Professionals
+                                        </h3>
+                                        <p class="lead-1">
+                                            Create written records from conference or seminar videos.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="section" style="background-color: #f3f8fb;">
+                        <div class="container">
+                            <header class="section-header">
+                                <h2 class="lead-7 fw-600">Frequently Asked Questions</h2>
+                                <hr>
+                            </header>
+                            <div class="row">
+                                <div class="col-md-8 mx-auto">
+                                    <div class="accordion accordion-connected accordion-arrow-right"
+                                        id="accordion-faq-1874524676">
+                                        <div class="card">
+                                            <h3 class="card-title lead-3">
+                                                <a class="collapsed" data-toggle="collapse"
+                                                    href="#collapse-faq-1874524676-1">
+                                                    How to turn YouTube video into transcript?
+                                                </a>
+                                            </h3>
+                                            <div id="collapse-faq-1874524676-1" class="collapse"
+                                                data-parent="#accordion-faq-1874524676">
+                                                <div class="card-body">
+                                                    With <a href="https://Krish's Ai.io/youtube-transcript-generator"
+                                                        target="_blank" rel="noopener noreferrer">YouTube Transcript
+                                                        Generator</a>, Simply paste the YouTube video link into Krish's
+                                                    Ai, click "Generate,"
+                                                    and get the transcript with timestamps.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <h3 class="card-title lead-3">
+                                                <a class="collapsed" data-toggle="collapse"
+                                                    href="#collapse-faq-1874524676-2">
+                                                    How to see the transcript of a YouTube video?
+                                                </a>
+                                            </h3>
+                                            <div id="collapse-faq-1874524676-2" class="collapse"
+                                                data-parent="#accordion-faq-1874524676">
+                                                <div class="card-body">
+                                                    Many YouTube videos have an option to view subtitles or closed
+                                                    captions. You can also use Krish's Ai to generate a transcript from
+                                                    the video link.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <h3 class="card-title lead-3">
+                                                <a class="collapsed" data-toggle="collapse"
+                                                    href="#collapse-faq-1874524676-3">
+                                                    Can Krish's Ai handle videos in languages other than English?
+                                                </a>
+                                            </h3>
+                                            <div id="collapse-faq-1874524676-3" class="collapse"
+                                                data-parent="#accordion-faq-1874524676">
+                                                <div class="card-body">
+                                                    Yes, Krish's Ai supports multiple languages for transcription.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <h3 class="card-title lead-3">
+                                                <a class="collapsed" data-toggle="collapse"
+                                                    href="#collapse-faq-1874524676-4">
+                                                    How accurate are the transcriptions?
+                                                </a>
+                                            </h3>
+                                            <div id="collapse-faq-1874524676-4" class="collapse"
+                                                data-parent="#accordion-faq-1874524676">
+                                                <div class="card-body">
+                                                    Krish's Ai provides highly accurate transcripts with timestamps.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <h3 class="card-title lead-3">
+                                                <a class="collapsed" data-toggle="collapse"
+                                                    href="#collapse-faq-1874524676-5">
+                                                    Is there a limit to the video length for transcription?
+                                                </a>
+                                            </h3>
+                                            <div id="collapse-faq-1874524676-5" class="collapse"
+                                                data-parent="#accordion-faq-1874524676">
+                                                <div class="card-body">
+                                                    Krish's Ai can handle videos of various lengths without limitations.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <h3 class="card-title lead-3">
+                                                <a class="collapsed" data-toggle="collapse"
+                                                    href="#collapse-faq-1874524676-6">
+                                                    Can I edit the transcript after it's generated?
+                                                </a>
+                                            </h3>
+                                            <div id="collapse-faq-1874524676-6" class="collapse"
+                                                data-parent="#accordion-faq-1874524676">
+                                                <div class="card-body">
+                                                    Yes, you can edit the transcript within the Krish's Ai interface.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <h3 class="card-title lead-3">
+                                                <a class="collapsed" data-toggle="collapse"
+                                                    href="#collapse-faq-1874524676-7">
+                                                    Can I export the transcript to other formats?
+                                                </a>
+                                            </h3>
+                                            <div id="collapse-faq-1874524676-7" class="collapse"
+                                                data-parent="#accordion-faq-1874524676">
+                                                <div class="card-body">
+                                                    Yes, Krish's Ai allows you to export transcripts in multiple
+                                                    formats.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <h3 class="card-title lead-3">
+                                                <a class="collapsed" data-toggle="collapse"
+                                                    href="#collapse-faq-1874524676-8">
+                                                    Is Krish's Ai suitable for professional use?
+                                                </a>
+                                            </h3>
+                                            <div id="collapse-faq-1874524676-8" class="collapse"
+                                                data-parent="#accordion-faq-1874524676">
+                                                <div class="card-body">
+                                                    Absolutely, Krish's Ai is designed to meet the needs of
+                                                    professionals, businesses or yt scribe.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="section" style="background-color: #ffffff;">
+                        <div class="container">
+                            <div class="row gap-y" style="margin: 20px -15px;">
+                                <div class="col-md-12 col-lg-12 mx-auto">
+                                    <h2 class="lead-7 fw-600">What Our Users Say</h2>
+                                </div>
+                            </div>
+                            <div class="row gap-y" style="display: flex; justify-content: space-between;">
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="tab-content-card">
+                                        <div class="rating mb-3">
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                        </div>
+                                        <p class="lead-1">
+                                            "The Free YouTube Transcript Generator is a game-changer for me. As a
+                                            marketing professional, I often need quick access to video transcripts. This
+                                            tool is not only free but also incredibly efficient. It saves me valuable
+                                            time, and I highly recommend it."
+                                        </p>
+                                        <div class="media align-items-center pb-0">
+                                            <div class="media-body lh-1">
+                                                <div class="fw-400 small-1 mb-1 ng-text-theme">Sarah Johnson</div>
+                                                <small class="text-lighter">Marketing Specialist</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="tab-content-card">
+                                        <div class="rating mb-3">
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                        </div>
+                                        <p class="lead-1">
+                                            "Being a student, I frequently use YouTube for educational content. The Free
+                                            YouTube Transcript Generator has been a lifesaver. It's user-friendly, fast,
+                                            and the ability to copy transcripts without timestamps is a big plus.
+                                            Definitely my go-to tool now!"
+                                        </p>
+                                        <div class="media align-items-center pb-0">
+                                            <div class="media-body lh-1">
+                                                <div class="fw-400 small-1 mb-1 ng-text-theme">Alex Chen</div>
+                                                <small class="text-lighter">Student</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="tab-content-card">
+                                        <div class="rating mb-3">
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                        </div>
+                                        <p class="lead-1">
+                                            "I deal with a lot of technical tutorials on YouTube, and accurate
+                                            transcripts are crucial. The Free YouTube Transcript Generator has exceeded
+                                            my expectations. It's reliable, and the option to download transcripts
+                                            simplifies my workflow. Highly satisfied
+                                            with this tool."
+                                        </p>
+                                        <div class="media align-items-center pb-0">
+                                            <div class="media-body lh-1">
+                                                <div class="fw-400 small-1 mb-1 ng-text-theme">David Rodriguez</div>
+                                                <small class="text-lighter">IT Consultant</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="tab-content-card">
+                                        <div class="rating mb-3">
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                        </div>
+                                        <p class="lead-1">
+                                            "Krish's Ai's timestamps make it easy to reference specific points in
+                                            research interviews."
+                                        </p>
+                                        <div class="media align-items-center pb-0">
+                                            <div class="media-body lh-1">
+                                                <div class="fw-400 small-1 mb-1 ng-text-theme">Emily Chen</div>
+                                                <small class="text-lighter">Researcher</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="tab-content-card">
+                                        <div class="rating mb-3">
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                        </div>
+                                        <p class="lead-1">
+                                            "Using Krish's Ai has streamlined our client meeting notes process. Great
+                                            tool!"
+                                        </p>
+                                        <div class="media align-items-center pb-0">
+                                            <div class="media-body lh-1">
+                                                <div class="fw-400 small-1 mb-1 ng-text-theme">Michael Thompson</div>
+                                                <small class="text-lighter">Consultant</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-lg-4">
+                                    <div class="tab-content-card">
+                                        <div class="rating mb-3">
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                            <label class="fa fa-star active"></label>
+                                        </div>
+                                        <p class="lead-1">
+                                            "Krish's Ai's transcripts have improved accessibility for our online course
+                                            materials."
+                                        </p>
+                                        <div class="media align-items-center pb-0">
+                                            <div class="media-body lh-1">
+                                                <div class="fw-400 small-1 mb-1 ng-text-theme">Laura Wilson</div>
+                                                <small class="text-lighter">Educator</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="section text-center" style="background-color: #f3f8fb;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 mx-auto" style="background: linear-gradient(180deg, #0048D6 0%, #CED5FF 123%);
+                 border-radius: 30px; display: flex; flex-direction: column; align-items: center;
+                 opacity: 1; padding: 30px 40px; color: #ffffff;">
+                                    <br>
+                                    <h2 class="lead-6 fw-500" style="color: #ffffff;">Start Transcribing YouTube with
+                                        Krish's Ai Free and Fast
+                                    </h2>
+                                    <br><a class="btn btn-primary btn-xl btn-round tab-btn-default tab-btn-Krish's Ai"
+                                        target="_blank" href="/youtube-transcript-generator" rel="noopener noreferrer">
+                                        Start Transcription Online
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <script async
+                        src="https://cdn.Krish's Ai.io/Krish's Ai/tools/youtube-transcript-generator/v1/js/chunk-vendors.f3045f52.js"></script>
+                    <script async
+                        src="https://cdn.Krish's Ai.io/Krish's Ai/tools/youtube-transcript-generator/v1/js/app.f8e527fb.js"></script>
+                </main>
+                <script type="text/javascript"
+                    src="https://cdn.zbaseglobal.com/saasbox/resources/js/SmoothScroll_1.1.2_ddb27611bf54a74e40dc23a8913c5ed2.js"
+                    id="smoothscroll-js"></script>
+                <script type="text/javascript"
+                    src="https://cdn.zbaseglobal.com/saasbox/resources/js/objectFitPolyfill.min_1.1.2_7ea81a2cdee885d268b48d7c600d10df.js"
+                    id="objectfit-polyfill-js"></script>
+                <script type="text/javascript"
+                    src="https://cdn.zbaseglobal.com/saasbox/resources/js/aos_1.1.2_d3718e34eeb0355be8e3179a2e2bccb7.js"
+                    id="aos-js"></script>
+                <script type="text/javascript"
+                    src="https://cdn.zbaseglobal.com/saasbox/resources/js/jquery.countdown.min_1.1.2_5d3ff3c3fbaa67cc639501f44eeb07be.js"
+                    id="jquery-countdown-js"></script>
+                <script type="text/javascript"
+                    src="https://cdn.zbaseglobal.com/saasbox/resources/js/jquery.waypoints.min_1.1.2_7d05f92297dede9ecfe3706efb95677a.js"
+                    id="waypoints-js"></script>
+                <script type="text/javascript"
+                    src="https://cdn.zbaseglobal.com/saasbox/resources/js/countUp.min_1.1.2_2ff27ddb6a758e8defbe8750c975e87f.js"
+                    id="countup-js"></script>
+                <script type="text/javascript"
+                    src="https://cdn.zbaseglobal.com/saasbox/resources/js/granim.min_1.1.2_77bb73352c8c9c138d33326092be39f4.js"
+                    id="granim-js"></script>
+                <script type="text/javascript"
+                    src="https://cdn.zbaseglobal.com/saasbox/resources/js/slick.min_1.1.2_d5a61c749e44e47159af8a6579dda121.js"
+                    id="slick-js"></script>
+                <script type="text/javascript"
+                    src="https://cdn.zbaseglobal.com/saasbox/resources/js/typed.min_1.1.2_5d53ae31eda336c919b79ad3590e8589.js"
+                    id="typed-js"></script>
+                <script type="text/javascript"
+                    src="https://cdn.zbaseglobal.com/saasbox/resources/js/imagesloaded.min_5.0.0_6823120876c9afc8929418c9a6f8e343.js"
+                    id="imagesloaded-js"></script>
+                <script type="text/javascript"
+                    src="https://cdn.zbaseglobal.com/saasbox/resources/js/shuffle.min_1.1.2_fb91e20df994252467172e7bc95758db.js"
+                    id="shufflejs-js"></script>
+                <script type="text/javascript"
+                    src="https://cdn.zbaseglobal.com/saasbox/resources/js/jarallax.min_1.1.2_4d95aee2e4fb638240195c2e00125a9e.js"
+                    id="jarallax-js"></script>
+                <script type="text/javascript"
+                    src="https://cdn.zbaseglobal.com/saasbox/resources/js/jarallax-video.min_1.1.2_07964f804f6de718cd802a418491e57e.js"
+                    id="jarallax-video-js"></script>
+                <div id="offcanvas-search" class="offcanvas bg-dark h-auto" data-animation="slide-down">
+                    <div class="row">
+                        <form class="col-md-8 mx-auto input-glass" action="/" method="get">
+                            <input class="form-control form-control-lg" type="text" name="s" placeholder="Search..."
+                                value="">
+                        </form>
+                    </div>
+                </div>
+            </body>
+
+            </html>
+        </div>
+    </div>
+    <style>
+        #pay_unpaid_invoice {
+            z-index: 2000;
+            border-radius: 8px;
+            width: 380px;
+            height: auto;
+            /*height: 200px;*/
+            top: 80px;
+            right: 20px;
+            background-repeat: no-repeat;
+            background-position: 5px 5px;
+            animation: slip_left_in;
+            animation-duration: 1.5s;
+            display: flex;
+            flex-direction: row;
+            padding: 14px 26px 14px 13px;
+            box-sizing: border-box;
+            border: 1px solid #ebeef5;
+            position: fixed;
+            background-color: #fff;
+            box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+            transition: opacity .3s, transform .3s, left .3s, right .3s, top .4s, bottom .3s;
+            overflow: hidden;
+        }
+
+        @keyframes slip_left_in {
+            0% {
+                right: -380px;
+                top: 80px;
+            }
+
+            100% {
+                right: 20px;
+                top: 80px;
+            }
+        }
+
+        #pay_lasted_invoice_button {
+            border-radius: 5px;
+            border: none;
+            color: white;
+            width: 100px;
+            background-color: #67c23a;
+            margin-left: 50px;
+            margin-top: 7px;
+            height: 28px;
+            line-height: 1;
+        }
+
+        #cancel_pay_invoice_button {
+            border-radius: 5px;
+            border: none;
+            color: white;
+            width: 100px;
+            background-color: #F56C6C;
+            margin-left: 100px;
+            margin-top: 7px;
+            height: 28px;
+            line-height: 1;
+        }
+
+        #pay_invoice {
+            display: flex;
+        }
+
+        #pay_invoice_left_top {
+            width: 20%;
+            margin-left: 15px;
+            margin-top: 5px;
+        }
+
+        #pay_invoice_right_top {
+            display: flex;
+            flex-direction: column;
+            width: 70%;
+            margin-top: 5px;
+        }
+
+        #pay_invoice_button {
+            width: 100%;
+            /*border-top-style: solid;*/
+            /*border-top-color: #dadce0;*/
+        }
+
+        #pay_lastest_success {
+            /*background-color: cornflowerblue;*/
+        }
+
+        #pay_invoice_close:hover {
+            background: #f4f4f4;
+            background-image: -webkit-linear-gradient(top, #f4f4f4, white);
+            background-image: -moz-linear-gradient(top, #f4f4f4, white);
+            background-image: -ms-linear-gradient(top, #f4f4f4, white);
+            background-image: -o-linear-gradient(top, #f4f4f4, white);
+            background-image: linear-gradient(to bottom, #f4f4f4, white);
+            text-decoration: none;
+        }
+    </style>
+    <script>
+        function jumpToInvoice() {
+            // 初始化用户
+            var user_info = {
+                'id': '',
+                'email': '',
+                'registered_at': ''
+            };
+            var user_action = {
+                'user_action': 12,
+                'action_type': 1,
+                'user_info': user_info
+            };
+            // $('#pay_unpaid_invoice').css('display','none');
+            $.ajax({
+                type: "POST",
+                url: "/user/default/save-renew-popup-action",
+                async: true,
+                data: {
+                    'user_action': user_action,
+                    'product_mark': ''
+                },
+                success(res) {
+                    if (res.code == 100000) {
+                        window.open("");
+                    }
+                }
+            });
+        }
+        function cancelJumpPayInvoice() {
+            $('#pay_unpaid_invoice').css('display', 'none');
+            // 初始化用户
+            var user_info = {
+                'id': '',
+                'email': '',
+                'registered_at': ''
+            };
+            var user_action = {
+                'user_action': 14,
+                'action_type': 1,
+                'user_info': user_info
+            };
+            // $('#pay_unpaid_invoice').css('display','none');
+            $.ajax({
+                type: "POST",
+                url: "/user/default/save-renew-popup-action",
+                async: true,
+                data: {
+                    'user_action': user_action,
+                    'product_mark': ''
+                },
+                success(res) { }
+            });
+        }
+
+        // 点击取消订阅
+        function cancelUserPayInvoice() {
+            // 初始化用户
+            var user_info = {
+                'id': '',
+                'email': '',
+                'registered_at': ''
+            };
+            var user_action = {
+                'user_action': 13,
+                'action_type': 1,
+                'user_info': user_info
+            };
+            $.ajax({
+                type: "POST",
+                url: "/pay/default/cancel-old-sub",
+                async: true,
+                data: {
+                    "stripe_sub": '',
+                },
+                success(res) {
+                    if (res.code == 100000) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/user/default/save-renew-popup-action",
+                            async: true,
+                            data: {
+                                'user_action': user_action,
+                                'product_mark': ''
+                            },
+                            success(res) {
+                                if (res.code == 100000) {
+                                    $('#pay_unpaid_invoice').css('display', 'none');
+                                }
+                            }
+                        });
+                    } else {
+                        $('#cancelUserPayInvoiceTipId').css('display', 'block');
+                        document.getElementById('cancelUserPayInvoiceTipId').innerHTML = res.message
+                    }
+                }
+            });
+        }
+    </script>
+
+    <div id="g_id_onload" data-client_id="630072318488-5jn6np2l4jknug91dehqarem7epqrua4.apps.googleusercontent.com"
+        data-context="signin" data-callback="handleCredentialResponse">
+    </div>
+    <script>
+        function handleCredentialResponse(res) {
+            let ga_cid = getGACid();
+            let data = {
+                ga_cid: ga_cid
+            };
+            let state = btoa(encodeURIComponent(JSON.stringify(data)));
+            $.ajax({
+                type: "POST",
+                url: "/user/default/new-google-callback",
+                async: true,
+                data: {
+                    "JWT": res,
+                    "state": state
+                },
+                success(res) {
+                    if (res.code == 100000) {
+                        // 向quora pixel同步用户注册事件
+                        if (res.data.is_register) {
+                            if (typeof qp === "function") {
+                                qp('track', 'CompleteRegistration');
+                            }
+                            // 向ga发送谷歌注册事件
+                            if (typeof gtag === "function") {
+                                gtag('event', 'google_register', {
+                                    'event_category': 'google_register',
+                                    'label': 'google_register_label',
+                                    'method': 'Google'
+                                });
+                            }
+                        }
+                        // 向ga发送谷歌登录事件
+                        if (typeof gtag === "function") {
+                            gtag('event', 'google_login', {
+                                'event_category': 'google_login',
+                                'label': 'google_login_label',
+                                'method': 'Google'
+                            });
+                        }
+
+                        if (res.data && res.data.url && res.data.url != "/") {
+                            window.location.href = res.data.url;
+                        } else {
+                            window.location.reload();
+                        }
+                    } else {
+                        if (res.data && res.data.url) {
+                            window.location.href = res.data.url;
+                        } else {
+                            window.location.href = '/user/login';
+                        }
+                    }
+                }
+            });
+        };
+        var overWidth = 992;
+        //  判断nav内容是否溢出，溢出切换为移动端样式
+        function navChange() {
+            var navWrap = document.querySelector('#saasbox-nav');
+            var navWidth = navWrap.clientWidth;
+            var navScrollWidth = navWrap.scrollWidth;
+            if (navWidth > 991 && navWidth < 1280 && navScrollWidth - navWidth > 0) {
+                document.body.clientWidth > overWidth ? overWidth = document.body.clientWidth : '';
+                $(navWrap).addClass('over-navbar');
+            } else {
+                if (document.body.clientWidth > overWidth || document.body.clientWidth < 992 || navWidth > 1280) {
+                    $(navWrap).removeClass('over-navbar');
+                }
+            }
+        };
+        $('#saasbox-nav').ready(function () {
+            navChange();
+        });
+        $(window).resize(function () {
+            navChange();
+        });
+        window.saasboxOpenNavBanner = function (placeholder1 = '', placeholder2 = '', placeholder3 = '') {
+            var banner_cookie_name = 'saasboxNavBanner';
+            var banner_cookie = getCookie(banner_cookie_name);
+            var saasbox_language = "en-US";
+            if (banner_cookie) {
+                return;
+            }
+            var banner_config = {
+                "active": false,
+                "is_closed": true,
+                "text_color": "#3D3D3D",
+                "background_color": null,
+                "nav_banner_height": 100,
+                "content": "<style>\n    #saasbox-nav .saasbox-nav-banner {\n        height: 80px !important;\n        text-align: center !important;\n    }\n#saasbox-nav .saasbox-nav-banner .nav-banner-close {\nposition: absolute;\ntop: 0;\nright: 0;\nwidth: 18px;\nheight: 18px;\nbackground: #fff;\nborder-radius: 50%;\ncolor:#FE415B;\n}\n<\/style>\n<a class=\"btn-round dn-btn-extension\" href=\"\/pricing?utm_source=ng_banner\" target=\"_blank\" rel=\"noopener noreferrer\">\n<img src=\"https:\/\/cdn.Krish's Ai.io\/Krish's Ai\/static\/common\/image\/christmas-Krish's Ai.png\" alt=\"Krish's Ai | Christmas\">\n<\/a>"
+            };
+            var banner_height = banner_config.nav_banner_height;
+            if (banner_config.length === 0) {
+                return;
+            }
+            if (banner_config.active !== true) {
+                return;
+            }
+            var banner_element = document.getElementById(banner_cookie_name);
+            var content = banner_config.content.replace('[%placeholder1%]', placeholder1);
+            content = content.replace('[%placeholder2%]', placeholder2);
+            content = content.replace('[%placeholder3%]', placeholder3);
+            if (banner_config.is_closed) {
+                var tooltip_text = 'Do not prompt today';
+                if (saasbox_language == 'zh-CN') {
+                    tooltip_text = '今日不再提示';
+                }
+                content += '<i class="fa fa-times nav-banner-close" aria-hidden="true" onclick="saasboxCloseNavBanner()"><span class="nav-banner-tooltip nav-banner-tooltip-bottom">' + tooltip_text + '</span></i>';
+            }
+            content = '<p class="nav-banner-content">' + content + '</p>';
+            banner_element.innerHTML = content;
+            banner_element.style.display = "";
+            var layout_container = document.getElementById("mainContent");
+            layout_container.style.marginTop = banner_height + 'px';
+        };
+
+        window.saasboxCloseNavBanner = function () {
+            var banner_cookie_name = 'saasboxNavBanner';
+            var banner_element = document.getElementById(banner_cookie_name);
+            banner_element.style.display = "none";
+            var layout_container = document.getElementById("mainContent");
+            layout_container.style.marginTop = '';
+            setCookie(banner_cookie_name, banner_cookie_name, 1)
+        };
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + "; " + expires;
+        }
+    </script>
+    <script type="text/javascript" src="https://cdn.zbaseglobal.com/zbase/js/zbase-fingerprint.js">
+    </script>
+    <script>
+        //处理是否需要生成匿名用户的id,用于记录用户行为日志
+        function handleCookieAnonymousUserId() {
+            var cookie_expire_days = 3;
+            //从cookie取值，是否是该用户第一次访问
+            var is_first_visit = getCookie("is_first_visit");
+            //表示是第一次访问
+            if (is_first_visit == "true") {
+                var fp = new Fingerprint2();
+                fp.get(function (result) {
+                    var anonymous_user_id = result;
+
+                    //设置anonymous_user_id到cookie中
+                    document.cookie = "anonymous_user_id=" + anonymous_user_id;
+                    //从cookie中读取first_visit_path,通过ajax模拟调用一次
+                    var first_visit_path = getCookie("first_visit_path");
+                    if ("" != first_visit_path) {
+                        //通过ajax的方式模拟调用一次
+                        first_visit_path = unescape(first_visit_path)
+                        $.ajax({
+                            type: "GET",
+                            url: first_visit_path,
+                            async: true,
+                            data: {},
+                            success(res) { },
+                            error(error) { }
+                        });
+                    }
+                });
+            }
+            //表示业务侧后端代码，没有记录用户通过渠道来的用户信息,生成匿名用户id即可
+            else if (is_first_visit == "") {
+                var fp = new Fingerprint2();
+                fp.get(function (result) {
+                    var anonymous_user_id = result;
+                    //设置anonymous_user_id到cookie中
+                    document.cookie = "anonymous_user_id=" + anonymous_user_id;
+                    //设置is_first_visit到cookie中
+                    document.cookie = "is_first_visit=true";
+                });
+            }
+            //表示用户不是第一次访问，不需要任何操作
+            else { }
+        }
+        //默认调用
+        handleCookieAnonymousUserId();
+    </script>
+    <!-- Footer -->
+    <footer id="layout-footer" class="footer bg-gray py-7">
+        <div class='footer-content'>
+            <div class='container saasbox-container'>
+                <div class='saasbox-footer-wrap'>
+
+                    <div class='footer-left'>
+                        <div>
+                            <a href='/'>
+                                <img src='' alt='' class='footer-logo'>
+                            </a>
+                            <p>Krish's Ai - AI Summary for YouTube, Podcast, Book, PDF, Audio, Video and taking notes.
+                                Save your time and improve learning efficiency by 10x.</p>
+                        </div>
+
+                    </div>
+
+                    <div class='col-6 col-md-6 col-xl-6 flex-wrap'
+                        style='display: inline-flex;justify-content: space-between;'>
+                        <div style='margin:0 10px;'>
+                            <h6 class='mb-4 mt-1'><strong>Products</strong></h6>
+                            <div class='nav flex-column' style='white-space: nowrap;'><a class='nav-link'
+                                    href='/youtube-transcript-generator' target='_blank'>YouTube Transcript</a><a
+                                    class='nav-link' href='/youtube-video-summarizer' target='_blank'>YouTube
+                                    Summarizer</a><a class='nav-link' href='/ai-presentation-maker' target='_blank'>AI
+                                    Presentation Maker</a><a class='nav-link' href='/ai-homework-helper'
+                                    target='_blank'>AI Homework Helper</a><a class='nav-link' href='/ai-math-solver'
+                                    target='_blank'>AI Math Solver</a><a class='nav-link' href='/ai-detector'
+                                    target='_blank'>AI Detector</a><a class='nav-link' href='/ai-humanizer'
+                                    target='_blank'>AI Humanizer</a><a class='nav-link' href='/chat-pdf'
+                                    target='_blank'>ChatPDF</a><a class='nav-link' href='/ask-ai' target='_blank'>ASK
+                                    AI</a></div>
+                        </div>
+                        <div style='margin:0 10px;'>
+                            <h6 class='mb-4 mt-1'><strong>AI Tools</strong></h6>
+                            <div class='nav flex-column' style='white-space: nowrap;'><a class='nav-link'
+                                    href='/ai-presentation-maker' target='_blank'>AI Presentation Maker</a><a
+                                    class='nav-link' href='/ai-mind-map-generator' target='_blank'>AI Mind Map
+                                    Generator</a><a class='nav-link' href='/ai-flashcard-maker' target='_blank'>AI
+                                    Flashcard Maker</a><a class='nav-link' href='/ai-answer-generator'
+                                    target='_blank'>AI Answer Generator</a><a class='nav-link'
+                                    href='/ai-diagram-generator' target='_blank'>AI Diagram Generator</a><a
+                                    class='nav-link' href='/ai-flowchart-generator' target='_blank'>AI Flowchart
+                                    Generator</a><a class='nav-link' href='/ai-podcast-generator' target='_blank'>AI
+                                    Podcast Generator</a><a class='nav-link' href='/ai-essay-writer' target='_blank'>AI
+                                    Essay Writer</a></div>
+                        </div>
+                        <div style='margin:0 10px;'>
+                            <h6 class='mb-4 mt-1'><strong>About</strong></h6>
+                            <div class='nav flex-column' style='white-space: nowrap;'><a class='nav-link'
+                                    href='/about-us' target='_blank'>About Us</a><a class='nav-link' href='/contact-us'
+                                    target='_blank'>Contact Us</a><a class='nav-link' href='/privacy'
+                                    target='_blank'>Privacy</a><a class='nav-link' href='/terms'
+                                    target='_blank'>Terms</a><a class='nav-link' href='/extension-privacy'
+                                    target='_blank'>Extension Privacy</a><a class='nav-link' href='/interview'
+                                    target='_blank'>Interviews</a><a class='nav-link' href='/blog'
+                                    target='_blank'>Blog</a>
+                                <a class='nav-link' href='/free-tools' target='_blank'>Free Tools</a><a class='nav-link'
+                                    href='/smart-tab' target='_blank'>Smart Tab</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class='social social-bordered'>
+
+                            <a href='' target='_blank' rel='nofollow'>
+                                <i class='fa fa-discord'></i>
+                            </a>
+
+                            <a href='https://twitter.com/Krish' s Ai_AINote' target='_blank' rel='nofollow'>
+                                <i class='fa fa-twitter'></i>
+                            </a>
+
+                            <a href='https://www.facebook.com/groups/Krish' s Ai' target='_blank' rel='nofollow'>
+                                <i class='fa fa-facebook'></i>
+                            </a>
+
+                            <a href='https://www.youtube.com/@Krish' s Ai' target='_blank' rel='nofollow'>
+                                <i class='fa fa-youtube'></i>
+                            </a>
+
+                        </div>
+                        <div style='text-align: center; display: inline-flex; padding-top: 20px;'>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='site-statement'>
+            <hr />
+            <p>
+                Copyright 2025 Krish's Ai.io. All rights reserved. </p>
+        </div>
+    </footer>
+    <script>
+        // switch language
+        function switchLanguage(language) {
+            var name = 'sbox-l';
+            var value = language;
+            var date = new Date();
+            date.setTime(date.getTime() + (24 * 3600 * 1000));
+            var expires = date.toGMTString();
+            document.cookie = name + "=" + value + ';expires=' + expires + ";path=/";
+            // encode编码避免XSS
+            let window_href = "";
+            if (window_href != '') {
+                let url = "/" + language + window_href;
+                if (window_href == '/') {
+                    url = "/" + language
+                }
+                window.location.href = url;
+                return;
+            }
+            if (self != top) {
+                window.parent.location.reload();
+            } else {
+                location.reload();
+            }
+        }
+    </script>
+    <script>
+        var contentMinH = $(window).height() - $("#saasbox-nav").height() - $(".footer").outerHeight();
+        $("#mainContent").css('minHeight', contentMinH + 'px');
+        $(function () {
+            $(".tigger").mouseenter(function () {
+                $(this).find(".popup-custom").css("display", "block");
+            });
+            $(".tigger").mouseleave(function () {
+                $(this).find(".popup-custom").css("display", "none");
+            });
+        });
+        $(".sbox-carousel > .nav-link.nav-type-button").mouseenter(function () {
+            var sboxCarousel = $(this).parent();
+            sboxCarousel.attr('data-sboxmouseon', 1);
+            setTimeout(() => {
+                let sboxCarouselHover = sboxCarousel.siblings('.sbox-carousel-hover');
+                let navBtnFirst = $(this).children();
+                let hoverA = sboxCarouselHover.children('a');
+                hoverA.text(navBtnFirst.attr('data-sboxtitle'));
+                hoverA.attr('href', navBtnFirst.attr('data-sboxurl'));
+                let hoverP = sboxCarouselHover.children('p');
+                hoverP.text(navBtnFirst.attr('data-sboxsubtitle'));
+                let hoverImg = sboxCarouselHover.children('img');
+                hoverImg.attr('src', 'https://cdn.zbaseglobal.com/' + navBtnFirst.attr('data-sboxicon'));
+                sboxCarouselHover.show();
+            }, 0);
+        });
+        $(".sbox-carousel").mouseleave(function () {
+            $(this).attr('data-sboxmouseon', 0)
+            let sboxCarousel = $(this);
+            setTimeout(function () {
+                let sboxCarouselHover = sboxCarousel.siblings('.sbox-carousel-hover');
+                if (sboxCarouselHover.attr('data-sboxmouseon') != 1) {
+                    sboxCarouselHover.hide();
+                }
+            }, 50);
+        });
+        $(".sbox-carousel-hover").mouseenter(function () {
+            $(this).attr('data-sboxmouseon', 1)
+            $(this).show();
+        });
+        $(".sbox-carousel-hover").mouseleave(function () {
+            $(this).attr('data-sboxmouseon', 0)
+            $(this).hide();
+        });
+        $(".sbox-carousel").each(function (i, sboxCarousel) {
+            if (sboxCarousel.children.length <= 1) {
+                return
+            }
+            var interval = sboxCarousel.dataset.sboxinterval
+            var childFirst = sboxCarousel.children[0];
+            var timer = 0;
+            setTimeout(() => {
+                timer = setInterval(scrol, 30);
+            }, interval * 1000);
+
+            function scrol() {
+                if (sboxCarousel.dataset.sboxmouseon == 1) {
+                    if (sboxCarousel.scrollTop >= childFirst.scrollHeight / 2) {
+                        let childFirst = sboxCarousel.children[0];
+                        sboxCarousel.removeChild(childFirst);
+                        sboxCarousel.appendChild(childFirst);
+                    }
+                    sboxCarousel.scrollTop = 0;
+                    return;
+                }
+                if (sboxCarousel.scrollTop >= childFirst.scrollHeight) {
+                    sboxCarousel.scrollTop = 0;
+                    childFirst = sboxCarousel.children[0];
+                    sboxCarousel.removeChild(childFirst);
+                    sboxCarousel.appendChild(childFirst);
+                    clearInterval(timer);
+                    setTimeout(() => {
+                        timer = setInterval(scrol, 30);
+                    }, interval * 1000);
+                } else {
+                    sboxCarousel.scrollTop++;
+                }
+            }
+        });
+    </script>
+
+
+
+    <!--huoYan-->
+
+    <!-- Taboola Pixel Code -->
+
+    <!-- /.footer -->
+
+    <script src="https://zbase-global.zingfront.com/saasbox/assets/js/page.20210122.min.v1.js"></script>
+    <script src="https://zbase-global.zingfront.com/saasbox/assets/js/script.min.js"></script>
+    <script src="//zbase-global.zingfront.com/static/js/getrefcodeuser.js?v=1603348969"></script>
+    <!-- js -->
+    <script type='text/javascript' src=https://cdn.zbaseglobal.com/popup/js/popup1.6.0.js?v=1598946699></script>
+    <script type='text/javascript' src=https://cdn.zbaseglobal.com/popup/js/popup_tracking_bt.js?v=1596875266></script>
+    <script type='text/javascript'
+        src=https://cdn.zbaseglobal.com/popup/js/popup-userinfo-1.7.0.js?v=1596875266></script>
+    <script>
+        window.saasboxOpenNavBanner();
+    </script>
+    <script src="https://cdn.Krish's Ai.io/Krish's Ai/static/web3in1/js/listenCancelAcount.min.js"></script>
+</body>
+
+</html>
